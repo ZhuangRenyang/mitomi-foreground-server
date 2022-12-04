@@ -5,16 +5,16 @@ package com.mito.mitomi.foreground.server.exception;
  *  检查型异常类 - 继承Exception
  *  运行时异常类 - 继承RuntimeException
  */
-public class ServiceException{// extends RuntimeException
+public class ServiceException extends RuntimeException{
 
-//    private Integer serviceCode;
-//
-//    public ServiceException(Integer serviceCode, String message) {
-//        super(message);
-//        this.serviceCode = serviceCode;
-//    }
-//
-//    public Integer getServiceCode() {
-//        return serviceCode;
-//    }
+    private Integer serviceCode;
+
+    public ServiceException(Integer serviceCode, String message) {
+        super(message);
+        this.serviceCode = serviceCode;
+    }
+
+    public Integer getServiceCode() {
+        return serviceCode;
+    }
 }

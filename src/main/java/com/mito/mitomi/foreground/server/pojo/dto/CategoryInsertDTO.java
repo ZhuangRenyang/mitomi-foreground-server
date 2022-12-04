@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 //分类管理
 @Data
-public class CategoryAddNewDTO implements Serializable {
+public class CategoryInsertDTO implements Serializable {
     @ApiModelProperty(value = "类别名称", required = true, example = "家电数码")
     @NotBlank(message = "请填写有效的品牌名称-NotBlank")
     private String name;

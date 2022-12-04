@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Slf4j
-//@Configuration
+@Configuration
 public class BeanConfig {
     @Lazy
     @Bean

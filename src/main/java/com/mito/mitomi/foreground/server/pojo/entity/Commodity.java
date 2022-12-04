@@ -2,10 +2,11 @@ package com.mito.mitomi.foreground.server.pojo.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-public class Commodity {
+public class Commodity implements Serializable {
 
     private Long id;//记录id
 
