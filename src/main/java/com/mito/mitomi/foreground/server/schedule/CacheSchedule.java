@@ -5,7 +5,6 @@ import com.mito.mitomi.foreground.server.pojo.vo.CommodityListItemVO;
 import com.mito.mitomi.foreground.server.repo.ICommodityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,7 @@ import java.util.List;
  * 此类为了减少服务器压力,将MySQL写入Redis
  */
 @Slf4j
-//@Component
+@Component
 public class CacheSchedule {
     @Autowired
     private CommodityMapper commodityMapper;
