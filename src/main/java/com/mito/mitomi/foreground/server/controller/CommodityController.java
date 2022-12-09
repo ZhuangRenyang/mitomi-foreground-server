@@ -62,12 +62,12 @@ public class CommodityController {
     @ApiOperation("查询商品列表")
     @ApiOperationSupport(order = 40)
     @GetMapping("")
-    public JsonResult list(){//@AuthenticationPrincipal LoginPrincipal principal
+    public JsonResult list(@AuthenticationPrincipal LoginPrincipal principal){
         log.debug("接收到查询商品列表的请求");
 
-//        Long id = principal.getId();
-//        String username = principal.getUsername();
-//        log.debug("认证信息中:id:{},用户名:{}",id,username);
+        Long id = principal.getId();
+        String username = principal.getUsername();
+        log.debug("认证信息中:id:{},用户名:{}",id,username);
         List<CommodityListItemVO> list = commodityService.commodityList();
         return JsonResult.ok(list);
     }

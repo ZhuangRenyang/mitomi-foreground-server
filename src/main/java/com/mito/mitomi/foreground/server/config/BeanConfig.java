@@ -11,7 +11,6 @@ import java.util.Date;
 @Slf4j
 @Configuration
 public class BeanConfig {
-    @Lazy
     @Bean
     public static Date date(){
         log.info("BeanConfig.date()");

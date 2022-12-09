@@ -35,7 +35,7 @@ public class CommodityServiceImpl implements ICommodityService {
         String commodityInsertName = commodityInsertDTO.getName();//获取商品的名称
         int commodityCount = commodityMapper.countCommodityByName(commodityInsertName);//查询是否有该名称
         if (commodityCount>0){
-            String message = "添加失败,商品名称[\" + name + \"]已存在";
+            String message = "添加失败,商品名称[" + commodityInsertName + "]已存在";
             log.error(message);
             throw new ServiceException(ServiceCode.ERR_CONFLICT,message);//错误：冲突 - 重复数据
         }
