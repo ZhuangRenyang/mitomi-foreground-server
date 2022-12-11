@@ -3,23 +3,28 @@ package com.mito.mitomi.foreground.server.config;
 import com.mito.mitomi.foreground.server.filter.JwtAuthorizationFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+
 
 @Slf4j
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)//开启全局的授权访问检查
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     @Autowired
     private JwtAuthorizationFilter jwtAuthorizationFilter;
 
 
     @Override
+
     public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
@@ -34,8 +39,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // 2个连续的星号可以匹配若干个文件夹的层级
         // 例如：/**/test.js，可以匹配 /a/test.js 和 /b/test.js 和 /a/b/test.js
         String[] urls = {"/admins/login",
+                "/**/*.img",
                 "/doc.html",
-                "/upload",
                 "/**/*.css",
                 "/**/*.js",
                 "/swagger-resources",

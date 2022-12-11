@@ -6,6 +6,7 @@ import com.mito.mitomi.foreground.server.pojo.vo.CommodityListItemVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -47,7 +48,7 @@ public interface CommodityMapper {
      * @param name 新商品的名称
      * @return 受影响的行数，当修改成功时，返回1，如果无此id对应的数据，则返回0
      */
-    int updateCommodityNameById(@Param("id") Long id, @Param("name") String name);
+    int updateCommodityNameById(@Param("id") Long id, @Param("name") String name, @Param("gmtModified")LocalDateTime gmtModified);
 
     /**
      * 根据id查询商品详情
@@ -67,4 +68,11 @@ public interface CommodityMapper {
     int countCommodityByName(String name);
 
     int updateCommodityNameById(Commodity commodity);
+
+    /**
+     * 根据id查询商品url
+     * @param id 商品id
+     * @return 商品图片url路径
+     */
+    String selectCommodityLogoById(Long id);
 }

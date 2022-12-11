@@ -23,14 +23,14 @@ public class CacheSchedule {
     @Autowired
     private ICommodityRepository commodityRepository;
 
-
+    private static final long UPDATE_TIME = 1*60*60;
     /**
      * 计划任务，默认不开启，需要配置类进行配置
      */
     // cron = "秒 分 时 日 月 周"
     // cron = "56 23 18 ? * MON" 表示:每个月的周一(无视几号)的18:23:56将执行此任务
     // @Scheduled(cron = "56 23 18 ? * MON")
-    @Scheduled(fixedRate = 1 * 60 * 60 * 1000)
+    @Scheduled(fixedRate = UPDATE_TIME * 60 * 1000)
     public void updateCache() {
         log.debug("执行计划任务，更新缓存中的商品列表...");
         // 将redis中商品列表清除

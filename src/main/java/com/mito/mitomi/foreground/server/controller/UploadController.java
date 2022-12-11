@@ -1,10 +1,13 @@
 package com.mito.mitomi.foreground.server.controller;
 
+import com.mito.mitomi.foreground.server.pojo.dto.CommodityInsertDTO;
+import com.mito.mitomi.foreground.server.service.ICommodityService;
+import com.mito.mitomi.foreground.server.web.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -23,8 +26,8 @@ public class UploadController {
     private String dirPath;
 
     @RequestMapping("/upload")
-    public String upload(MultipartFile picFile) throws IOException {
-        log.debug("picFile:"+picFile);
+    public JsonResult upload(@RequestBody MultipartFile picFile) throws IOException {
+        log.debug("执行到添加图片的方法picFile:"+picFile);
         //得到文件原始文件名 a.jpg
         String filename = picFile.getOriginalFilename();
         //得到后缀名  从最后一个.出现的位置截取到最后
@@ -44,12 +47,16 @@ public class UploadController {
         //把文件保存到此路径
         picFile.transferTo(new File(filePath));
         log.debug("文件保存完成,请检查文件是否存在!"+filePath);
-        return filename;
+        log.debug("文件名称!"+filename);
+        return JsonResult.ok(filename);
     }
 
-    @RequestMapping("remove")
-    public void remove(String name) {
+
+    @RequestMapping("/remove/{name}")
+    public JsonResult remove(@PathVariable("name")String name) {
         String filePath = dirPath+"/"+name;
+        log.debug("执行到删除图片的方法,删除图片的名称{}",name);
         new File(filePath).delete(); //删除文件
+        return JsonResult.ok();
     }
 }

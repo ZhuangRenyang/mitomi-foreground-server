@@ -58,10 +58,17 @@
 
 
     <!--    修改-->
-    <!--    int updateCommodityNameById(@Param("id") Long id, @Param("name") String name);-->
+    <!--    int updateCommodityNameById(Commodity commodity);-->
     <update id="updateCommodityNameById">
         UPDATE page_commodity
-        SET name = #{name}
+        <set>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified =#{gmtModified}
+            </if>
+        </set>
         WHERE id = #{id}
     </update>
 
@@ -74,6 +81,12 @@
         WHERE name = #{name}
     </select>
 
+    <!--    String selectCommodityLogoById(int id);-->
+    <select id="selectCommodityLogoById" resultType="String">
+        SELECT logo
+        FROM page_commodity
+        WHERE id = #{id}
+    </select>
 
     <!--    CommodityDetailVO getCommodityById(Long id);-->
     <select id="getCommodityById" resultMap="commodityByIdDetailResultMap">
