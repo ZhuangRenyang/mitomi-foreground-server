@@ -39,10 +39,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         // 2个连续的星号可以匹配若干个文件夹的层级
         // 例如：/**/test.js，可以匹配 /a/test.js 和 /b/test.js 和 /a/b/test.js
         String[] urls = {"/admins/login",
-                "/**/*.img",
                 "/doc.html",
                 "/**/*.css",
                 "/**/*.js",
+                "/**/*.jpeg",
+                "/**/*.png",
+                "/**/*.jpg",
                 "/swagger-resources",
                 "/v2/api-docs"
         };
@@ -60,5 +62,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         //添加处理jwt的过滤器，必须执行在处理用户名密码过滤器(Security内置)之前。
         http.addFilterBefore(jwtAuthorizationFilter,
                 UsernamePasswordAuthenticationFilter.class);
+
     }
 }

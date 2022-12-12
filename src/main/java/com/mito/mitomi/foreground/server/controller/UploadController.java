@@ -33,7 +33,7 @@ public class UploadController {
         //得到后缀名  从最后一个.出现的位置截取到最后
         String suffix = filename.substring(filename.lastIndexOf("."));
         //得到唯一文件名 UUID.randomUUID()得到一个唯一标识
-        filename = UUID.randomUUID() + suffix;
+        filename =UUID.randomUUID() + suffix;
         log.debug("文件名:"+filename);
         //准备保存图片的文件夹路径
 //        String dirPath = "E:/files";

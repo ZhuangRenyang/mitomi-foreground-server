@@ -1,7 +1,6 @@
 package com.mito.mitomi.foreground.server.service.impl;
 
 import com.mito.mitomi.foreground.server.config.BeanConfig;
-import com.mito.mitomi.foreground.server.controller.UploadController;
 import com.mito.mitomi.foreground.server.exception.ServiceException;
 import com.mito.mitomi.foreground.server.mapper.CommodityMapper;
 import com.mito.mitomi.foreground.server.pojo.dto.CommodityInsertDTO;
@@ -26,6 +25,8 @@ public class CommodityServiceImpl implements ICommodityService {
     @Value("${dirPath}")
     private String dirPath;
 
+    private static final int FROM_INDEX = 10;
+    private static final String HTTP_URL="http://localhost:9080/";
     @Autowired
     private CommodityMapper commodityMapper;
 
@@ -46,12 +47,15 @@ public class CommodityServiceImpl implements ICommodityService {
             log.error(message);
             throw new ServiceException(ServiceCode.ERR_CONFLICT,message);//错误：冲突 - 重复数据
         }
+        //获取DTO中的logo图片名称,携带url地址
+        String logoUrl =HTTP_URL + commodityInsertDTO.getLogo();
         //创建实体对象(Mapper的方法参数是实体类型)
         Commodity commodity = new Commodity();
         //将当前方法参数的值复制到commodity  实体类型的对象中
         BeanUtils.copyProperties(commodityInsertDTO,commodity);//类型转换赋值
         commodity.setGmtCreate(BeanConfig.localDateTime());
-
+        //传入携带地址的图片路径传入sql
+        commodity.setLogo(logoUrl);
         int commodityInsertRows = commodityMapper.insertCommodity(commodity);
         switch (commodityInsertRows){
             case 0:{
@@ -82,11 +86,12 @@ public class CommodityServiceImpl implements ICommodityService {
             String message = "删除商品失败,删除的数据(id:"+id+")不存在";
             throw new ServiceException(ServiceCode.ERR_NOT_FOUND,message);
         }
-
+        //删除商品图片的方法
         String commodityLogoName = commodityMapper.selectCommodityLogoById(id);
-        log.debug("当前名称为:{}的图片删除了",commodityLogoName);
         if (commodityLogoName != null){
-            String filePath =dirPath+"/"+ commodityLogoName;
+            int logoIndex = commodityLogoName.indexOf("/",FROM_INDEX)+1;
+            log.debug("当前名称为:{}的图片删除了",commodityLogoName.substring(logoIndex));
+            String filePath =dirPath+"/"+ commodityLogoName.substring(logoIndex);
             new File(filePath).delete();
             log.debug("路径为:{}的图片删除成功",filePath);
         }

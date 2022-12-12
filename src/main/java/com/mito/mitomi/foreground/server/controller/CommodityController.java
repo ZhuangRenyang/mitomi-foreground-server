@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 @Api(tags = "1.商品管理模块")
 @RestController
-@RequestMapping("/commodity")
+@RequestMapping("/commodity")//这个路径嗯;里面有图片么?sql数据库有路径这里没有图片名称
 public class CommodityController {
     @Autowired
     private ICommodityService commodityService;
@@ -57,7 +57,7 @@ public class CommodityController {
         commodityService.updateCommodityNameById(id, name);
         return JsonResult.ok();
     }
-
+  //你的那个图片路径在哪啊
     //查询
     @ApiOperation("查询商品列表")
     @ApiOperationSupport(order = 40)
