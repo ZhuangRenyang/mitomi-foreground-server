@@ -39,6 +39,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         // 2个连续的星号可以匹配若干个文件夹的层级
         // 例如：/**/test.js，可以匹配 /a/test.js 和 /b/test.js 和 /a/b/test.js
         String[] urls = {"/admins/login",
+                "http://localhost:8081/mitomi/techno",
+                "/**/mitomi/techno",
+                "/mitomi",
+                "/techno",
                 "/doc.html",
                 "/**/*.css",
                 "/**/*.js",
@@ -54,7 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         // /*  - 匹配1层级路径，例如"/admins","/brands"..
         // /** - 匹配若干层级路径
         http.authorizeRequests()//请求需要被授权才可以访问
-                .antMatchers(urls) //匹配某些路径
+                .antMatchers(urls)//匹配某些路径
                 .permitAll()//允许直接访问(不需要经过认证授权)
                 .anyRequest() //除了以上配置的任何其他请求
                 .authenticated(); //已经通过认证才能访问
