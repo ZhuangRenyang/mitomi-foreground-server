@@ -71,4 +71,12 @@ public class CommodityController {
         List<CommodityListItemVO> list = commodityService.commodityList();
         return JsonResult.ok(list);
     }
+
+    @ApiOperationSupport(order = 50)
+    @GetMapping("/mitomi/{category}")
+    public JsonResult mitomiCategoryList(@PathVariable String category){
+        log.debug("查询{}分类列表",category);
+        List<CommodityListItemVO> commodityCategoryList = commodityService.commodityCategoryList(category);
+        return JsonResult.ok(commodityCategoryList);
+    }
 }

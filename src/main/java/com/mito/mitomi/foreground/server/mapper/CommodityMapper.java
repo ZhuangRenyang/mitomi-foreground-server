@@ -65,6 +65,8 @@ public interface CommodityMapper {
      */
     List<CommodityListItemVO> commodityList();
 
+    List<CommodityListItemVO> commodityCategoryList(String category);
+
     int countCommodityByName(String name);
 
     int updateCommodityNameById(Commodity commodity);

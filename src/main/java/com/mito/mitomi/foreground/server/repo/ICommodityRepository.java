@@ -14,6 +14,7 @@ public interface ICommodityRepository {
     void commodityPut(CommodityDetailVO commodityDetailVO);
     void commodityPutList(List<CommodityListItemVO> list);
 
+
     //删除商品数据
     void commodityDeleteItem(Long id);
     void commodityDeleteList();
@@ -21,4 +22,5 @@ public interface ICommodityRepository {
     //取出商品数据
     CommodityDetailVO commodityGet(Long id);
     List<CommodityListItemVO> commodityGetList();
+
 }

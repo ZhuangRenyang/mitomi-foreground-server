@@ -112,6 +112,14 @@
         <result column="positive_comment_count" property="positiveCommentCount"></result>
     </resultMap>
 
+    <!--    CommodityListItemVO commodityCategoryList(String category);-->
+    <select id="commodityCategoryList" resultMap="commodityListItemResultMap">
+        SELECT
+        <include refid="CommodityListItemQueryFields"/>
+        FROM page_commodity
+        WHERE category = #{category}
+    </select>
+
     <!--    List<CommodityListItemVO> commodityList();-->
     <select id="commodityList" resultMap="commodityListItemResultMap">
         SELECT

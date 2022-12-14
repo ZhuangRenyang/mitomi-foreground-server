@@ -39,5 +39,6 @@ public class CacheSchedule {
         List<CommodityListItemVO> commodityList = commodityMapper.commodityList();
         //将商品列表写入到redis
         commodityRepository.commodityPutList(commodityList);
+
     }
 }

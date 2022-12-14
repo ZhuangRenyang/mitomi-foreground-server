@@ -32,4 +32,6 @@ public interface ICommodityService {
      * @return 商品列表
      */
     List<CommodityListItemVO> commodityList();
+
+    List<CommodityListItemVO> commodityCategoryList(String category);
 }

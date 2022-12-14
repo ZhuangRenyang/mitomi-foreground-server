@@ -162,5 +162,12 @@ public class CommodityServiceImpl implements ICommodityService {
        return commodityRepository.commodityGetList();
     }
 
+    //查询分类列表
+    @Override
+    public List<CommodityListItemVO> commodityCategoryList(String category) {
+        List<CommodityListItemVO> commodityCategoryListItemVO = commodityMapper.commodityCategoryList(category);
+        return commodityCategoryListItemVO;
+    }
+
 
 }
